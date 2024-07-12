@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+    mysql:
+        container_name: mysql
+        image: mysql:5.5.49 # Docs: https://hub.docker.com/_/mysql
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_USER: dbuser
+            MYSQL_PASSWORD: dbpass
+            MYSQL_DATABASE: viksu
+        volumes:
+            - ./mysql-data:/var/lib/mysql
+
+    php:
+        container_name: php
+        build:
+            context: .
+            dockerfile: Dockerfile.php5
+        ports:
+            - 8080:80
+        depends_on:
+            - mysql
+        volumes:
+            - ./viksu-source:/var/www/html

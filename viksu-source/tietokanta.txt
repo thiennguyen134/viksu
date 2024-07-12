@@ -1,0 +1,1233 @@
+
+
+/*
+Kun asiakas rekisteröityy, niin luodaan asiakkaalle omat taulut:
+*/
+function create_usertbl($vilidb,$usertbl){
+	$query = "SELECT 1 FROM ".$usertbl;
+	$result = mysqli_query($vilidb, $query);	
+	/*
+	jos asiakkaalla ei ole vielä omia tauluja datalle niin luodaan rekisteröinnissä
+	*/
+	if(empty($result)){
+		$sqluser="CREATE TABLE `".$usertbl."1` (\n";
+			$sqluser.="	`id` INT(11) NOT NULL AUTO_INCREMENT,\n";
+			$sqluser.="`CreationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n";
+			$sqluser.="`EditDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n";
+			$sqluser.="`ViliUserId` INT(11) UNSIGNED NULL DEFAULT NULL,\n";
+			$sqluser.="`hallinto1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`hallinto2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`hallinto3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`hallinto4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`hallinto5_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`hallinto6_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`hallinto7_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`talous1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`talous2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`talous3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`talous4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`talous5_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`talous6_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`olosuhde1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`olosuhde2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`olosuhde3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`olosuhde4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ymparisto1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ymparisto2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ymparisto3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ymparisto4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ymparisto5_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ymparisto6_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ymparisto7_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ymparisto8_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tapahtuma1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tapahtuma2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tapahtuma3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tapahtuma4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tapahtuma5_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`varusteet1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`varusteet2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`varusteet3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`varusteet4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`varusteet5_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_ylin_1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_ylin_2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_ylin_3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_ylin_4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_esim_1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_esim_2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_esim_3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_esim_4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_esim_5_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_esim_6_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_esim_7_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_tekija_1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_tekija_2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_tekija_3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_tekija_4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_tekija_5_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`tyo_tekija_6_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ykstalous_1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ykstalous_2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`ykstalous_3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksterveys_1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksterveys_2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksterveys_3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksvarusteet_1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksvarusteet_2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksvarusteet_3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksosaaminen_1_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksosaaminen_2_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksosaaminen_3_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksosaaminen_4_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`yksosaaminen_5_chk` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`OrganOtherInputs0` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`OrganOtherInputs1` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`OrganOtherInputs2` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`OrganOtherInputs3` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`OrganOtherInputs4` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`OrganOtherInputs5` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`CommOtherInputs0` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`CommOtherInputs1` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`CommOtherInputs2` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`CommOtherInputs3` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`CommOtherInputs4` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`CommOtherInputs5` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`IndivOtherInputs0` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`IndivOtherInputs1` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`IndivOtherInputs2` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`IndivOtherInputs3` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`IndivOtherInputs4` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="`IndivOtherInputs5` CHAR(5) NULL DEFAULT NULL,\n";
+			$sqluser.="PRIMARY KEY (`id`)\n";
+			$sqluser.=")\n";
+			$sqluser2='';
+			$sqluser2="CREATE TABLE `".$usertbl."2` (\n";
+			$sqluser2.="	`id` INT(11) NOT NULL AUTO_INCREMENT,\n";
+			$sqluser2.="`CreationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n";
+			$sqluser2.="`EditDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n";
+			$sqluser2.="`ViliUserId` INT(11) UNSIGNED NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto1_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto1_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto2_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto2_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto3_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto3_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto4_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto4_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto4_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto4_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto5_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto5_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto5_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto5_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto6_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto6_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto6_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto6_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto6_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto6_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto6_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto6_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto6_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto7_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto7_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto7_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto7_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto7_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto7_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto7_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto7_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`hallinto7_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous1_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous1_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous2_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous2_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous3_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous3_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous4_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous4_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous4_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous4_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous5_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous5_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous5_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous5_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="`talous5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser2.="PRIMARY KEY (`id`)\n";
+			$sqluser2.=")\n";
+			$sqluser3='';
+			$sqluser3="CREATE TABLE `".$usertbl."3` (\n";
+			$sqluser3.="	`id` INT(11) NOT NULL AUTO_INCREMENT,\n";
+			$sqluser3.="`CreationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n";
+			$sqluser3.="`EditDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n";
+			$sqluser3.="`ViliUserId` INT(11) UNSIGNED NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde1_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde1_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde2_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde2_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde3_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde3_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`olosuhde3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto1_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto1_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto2_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto2_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto3_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto3_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto4_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto4_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto4_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto4_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto5_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto5_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto5_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto5_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto6_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto6_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto6_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto6_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto6_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto6_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto6_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto6_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto6_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto7_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto7_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto7_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto7_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto7_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto7_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto7_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto7_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto7_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto8_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto8_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto8_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto8_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto8_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto8_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto8_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto8_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`ymparisto8_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma1_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma1_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma2_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma2_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma3_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma3_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma4_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma4_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma4_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma4_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma5_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma5_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma5_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma5_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`tapahtuma5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet1_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet1_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet2_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet2_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet3_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet3_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet4_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet4_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet4_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet4_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet5_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet5_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet5_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet5_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="`varusteet5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser3.="PRIMARY KEY (`id`)\n";
+			$sqluser3.=")\n";
+			$sqluser4='';
+			$sqluser4="CREATE TABLE `".$usertbl."4` (\n";
+			$sqluser4.="	`id` INT(11) NOT NULL AUTO_INCREMENT,\n";
+			$sqluser4.="`CreationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n";
+			$sqluser4.="`EditDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n";
+			$sqluser4.="`ViliUserId` INT(11) UNSIGNED NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_1_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_1_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_2_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_2_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_3_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_3_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_4_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_4_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_4_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_4_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_ylin_4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_1_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_1_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_2_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_2_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_3_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_3_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_4_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_4_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_4_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_4_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_5_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_5_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_5_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_5_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_6_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_6_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_6_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_6_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_6_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_6_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_6_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_6_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_6_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_7_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_7_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_7_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_7_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_7_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_7_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_7_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_7_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_esim_7_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_1_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_1_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_2_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_2_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_3_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_3_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_4_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_4_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_4_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_4_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_5_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_5_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_5_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_5_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_6_date_a` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_6_date_l` DATE NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_6_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_6_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_6_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="`tyo_tekija_6_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser4.="`tyo_tekija_6_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser4.="`tyo_tekija_6_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser4.="`tyo_tekija_6_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser4.="PRIMARY KEY (`id`)\n";
+			$sqluser4.=")\n";
+			$sqluser5='';
+			$sqluser5="CREATE TABLE `".$usertbl."5` (\n";
+			$sqluser5.="	`id` INT(11) NOT NULL AUTO_INCREMENT,\n";
+			$sqluser5.="`CreationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n";
+			$sqluser5.="`EditDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n";
+			$sqluser5.="`ViliUserId` INT(11) UNSIGNED NULL DEFAULT NULL,\n";						
+									$sqluser5.="`ykstalous_1_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_1_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_2_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_2_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_3_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_3_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`ykstalous_3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_1_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_1_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_2_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_2_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_3_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_3_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksterveys_3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_1_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_1_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_2_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_2_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_3_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_3_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksvarusteet_3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_1_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_1_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_1_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_1_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_2_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_2_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_2_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_2_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_3_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_3_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_3_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_3_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_4_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_4_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_4_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_4_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_5_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_5_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_5_toteuttajat` VARCHAR(80) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_5_kustannusarvio` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser5.="`yksosaaminen_5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser5.="PRIMARY KEY (`id`)\n";
+			$sqluser5.=")\n";
+			$sqluser6='';
+			$sqluser6="CREATE TABLE `".$usertbl."6` (\n";
+			$sqluser6.="	`id` INT(11) NOT NULL AUTO_INCREMENT,\n";
+			$sqluser6.="`CreationDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,\n";
+			$sqluser6.="`EditDate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\n";
+			$sqluser6.="`ViliUserId` INT(11) UNSIGNED NULL DEFAULT NULL,\n";	
+									$sqluser6.="`OrganOtherInputs0_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs0_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs1_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs1_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs0_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs0_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs0_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs0_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs0_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs0_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs0_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs1_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs1_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs2_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs2_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs2_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs2_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs3_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs3_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs3_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs3_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs4_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs4_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs4_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs4_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs5_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs5_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs5_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs5_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`OrganOtherInputs5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs0_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs0_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs0_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs0_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs0_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs0_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs0_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs0_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs0_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs1_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs1_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs1_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs1_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs2_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs2_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs2_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs2_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs3_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs3_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs3_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs3_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs4_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs4_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs4_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs4_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs5_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs5_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs5_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs5_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`CommOtherInputs5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs0_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs0_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs0_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs0_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs0_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs0_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs0_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs0_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs0_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs1_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs1_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs1_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs1_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs1_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs1_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs1_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs1_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs1_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs2_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs2_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs2_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs2_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs2_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs2_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs2_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs2_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs2_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs3_date_a` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs3_date_l` DATE NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs3_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs3_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs3_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+									$sqluser6.="`IndivOtherInputs3_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs3_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs3_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs3_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs4_date_a` DATE NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs4_date_l` DATE NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs4_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs4_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs4_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs4_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs4_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs4_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs4_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs5_date_a` DATE NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs5_date_l` DATE NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs5_jarjestelyt` VARCHAR(250) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs5_toteuttajat` VARCHAR(250) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs5_kustannusarvio` VARCHAR(250) NULL DEFAULT NULL,\n";
+					$sqluser6.="`IndivOtherInputs5_tot` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs5_tot_osa_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+				$sqluser6.="`IndivOtherInputs5_tot_ei_txt` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser6.="`IndivOtherInputs5_kustannukset` VARCHAR(50) NULL DEFAULT NULL,\n";
+			$sqluser6.="PRIMARY KEY (`id`)\n";
+		$sqluser6.=")\n";
+		
+				
+		if ($vilidb->query($sqluser)===true){
+			if ($vilidb->query($sqluser2)===true){
+				if ($vilidb->query($sqluser3)===true){
+					if ($vilidb->query($sqluser4)===true){
+						if ($vilidb->query($sqluser5)===true){
+							if ($vilidb->query($sqluser6)===true){
+								echo"<br>usertaulu onnistui!<br><br>\n";
+							}else{
+								echo"<br>usertaulu EI6<br>".$sqluser."<br>\n";
+							}
+						}else{
+							echo"<br>usertaulu EI5<br>".$sqluser."<br>\n";
+						}
+					}else{
+						echo"<br>usertaulu EI4<br>".$sqluser."<br>\n";
+					}
+				}else{
+					echo"<br>usertaulu EI3<br>".$sqluser."<br>\n";
+				}
+			}else{
+				echo"<br>usertaulu EI2<br>".$sqluser."<br>\n";
+			}
+		}else{
+			echo"<br>usertaulu EI1<br>".$sqluser."<br>\n";
+		}
+								
+		$sqluserqry='';
+		$sqluserqry="CREATE TABLE `".$usertbl."qry` (`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,`date` DATE,";
+		$sqluserqry.="`kysely` SET('alku','loppu') NOT NULL DEFAULT 'alku',PRIMARY KEY (`id`))\n";
+		$sqluserqry.="COLLATE='latin1_swedish_ci';\n";
+		if ($vilidb->query($sqluserqry)===true){									
+			echo"<br>taulu onnistui!<br><br>\n";
+		}else{
+			echo"<br>".$sqluserqry;
+		}
+									/* LUO TAULU */
+		$sqluserqry='';
+		/*
+		$sqluserqry="ALTER TABLE `".$usertbl."qry`";
+		foreach($qryfields AS $qkey => $qvalue) {
+			$sqluserqry.=" ADD COLUMN `".$qvalue."` SMALLINT(5) UNSIGNED NULL DEFAULT NULL`,\n";
+		}
+		$sqluserqry2=substr($sqluserqry,0,-1);
+		$sqluserqry2.=";";
+		$sqluserqry='';
+		if ($vilidb->query($sqluserqry2)===true){									
+			echo"<br>taulu onnistui2!<br><br>\n";
+		}
+		*/
+	}
+	
+}
+
+/*
+Tietokanta
+*/
+DROP DATABASE IF EXISTS `vili`;
+CREATE DATABASE IF NOT EXISTS `vili` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `vili`;
+
+DROP TABLE IF EXISTS `sessions`;
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL,
+  `hash` varchar(40) NOT NULL,
+  `expiredate` datetime NOT NULL,
+  `ip` varchar(39) NOT NULL,
+  `agent` varchar(200) NOT NULL,
+  `cookie_crc` varchar(40) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=89 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `tekstit`;
+CREATE TABLE IF NOT EXISTS `tekstit` (
+  `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `kieli` char(5) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `Page_title` varchar(50) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `Page_title2` varchar(50) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `Page_title3` varchar(50) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_lang` varchar(5) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_langtxt` varchar(20) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_close` varchar(20) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_no` varchar(20) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_yes` varchar(20) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_cancel` varchar(20) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_Yhteystiedot` varchar(35) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_help` varchar(35) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_firstpage` varchar(35) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_firstpage2` varchar(35) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_design` varchar(35) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_calender` varchar(55) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_new` varchar(35) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_load` varchar(35) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_designfile` varchar(40) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_Filename` varchar(20) CHARACTER SET utf8 COLLATE utf8_czech_ci DEFAULT NULL,
+  `PAGE_Ohje` varchar(20) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_SesTimeout` varchar(45) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_Savename` varchar(25) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_Savename2` varchar(25) CHARACTER SET ucs2 COLLATE ucs2_swedish_ci DEFAULT NULL,
+  `PAGE_loadfile` varchar(25) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_loadfiletxt` varchar(25) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_ohje2` varchar(90) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_print` varchar(25) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_ohje3` varchar(90) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_ohje4` varchar(90) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_clockh` varchar(90) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_clockh2` varchar(125) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `PAGE_pvm` tinytext COLLATE utf8_swedish_ci,
+  `PAGE_errordbupdate` tinytext COLLATE utf8_swedish_ci,
+  `PAGE_errorinsert` tinytext COLLATE utf8_swedish_ci,
+  `PAGE_lataapdf` tinytext COLLATE utf8_swedish_ci,
+  `PAGE_choose` tinytext COLLATE utf8_swedish_ci,
+  `LOGIN_reg` tinytext COLLATE utf8_swedish_ci,
+  `LOGIN_reg2` tinytext COLLATE utf8_swedish_ci,
+  `LOGIN_usererr` tinytext COLLATE utf8_swedish_ci,
+  `LOGIN_errpw` tinytext COLLATE utf8_swedish_ci,
+  `LOGIN_login` tinytext COLLATE utf8_swedish_ci,
+  `LOGIN_user` tinytext COLLATE utf8_swedish_ci,
+  `LOGIN_pw` tinytext COLLATE utf8_swedish_ci,
+  `otsikko_muuta` varchar(90) CHARACTER SET latin1 DEFAULT NULL,
+  `otsikko_muutaa` varchar(115) CHARACTER SET latin1 DEFAULT NULL,
+  `otsikko_muutac` varchar(150) CHARACTER SET latin1 DEFAULT NULL,
+  `otsikko_muutab` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `otsikko_muutad` varchar(48) CHARACTER SET latin1 DEFAULT NULL,
+  `otsikko_muutamax` varchar(49) CHARACTER SET latin1 DEFAULT NULL,
+  `otsikko_muutamaxb` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
+  `kysymys_muutaInsBtn` varchar(51) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE1` varchar(53) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE1a` varchar(54) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE1b` varchar(55) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE2` varchar(56) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE2a` varchar(57) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE2b` varchar(58) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE2c` varchar(59) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE2ca` varchar(60) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE2cb` varchar(61) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE2d` varchar(61) COLLATE utf8_swedish_ci DEFAULT NULL,
+  `Menu_TITLE3` varchar(62) CHARACTER SET latin1 DEFAULT NULL,
+  `Menu_TITLE3a` varchar(63) CHARACTER SET latin1 DEFAULT NULL,
+  `UpdateError` text COLLATE utf8_swedish_ci,
+  `UpdateOk` text COLLATE utf8_swedish_ci,
+  `TasoO` varchar(64) CHARACTER SET latin1 DEFAULT NULL,
+  `TasoT` varchar(65) CHARACTER SET latin1 DEFAULT NULL,
+  `TasoY` varchar(66) CHARACTER SET latin1 DEFAULT NULL,
+  `TasoOa` varchar(67) CHARACTER SET latin1 DEFAULT NULL,
+  `TasoTa` varchar(68) CHARACTER SET latin1 DEFAULT NULL,
+  `TasoYa` varchar(75) CHARACTER SET latin1 DEFAULT NULL,
+  `page2_1` varchar(71) CHARACTER SET latin1 DEFAULT NULL,
+  `page2_2` varchar(72) CHARACTER SET latin1 DEFAULT NULL,
+  `page2_3` varchar(73) CHARACTER SET latin1 DEFAULT NULL,
+  `page2_4` varchar(74) CHARACTER SET latin1 DEFAULT NULL,
+  `page2_5` varchar(75) CHARACTER SET latin1 DEFAULT NULL,
+  `hallinto1h` varchar(77) CHARACTER SET latin1 DEFAULT NULL,
+  `hallinto1` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `hallinto2` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `hallinto3` varchar(100) CHARACTER SET latin1 DEFAULT NULL,
+  `hallinto4` varchar(150) CHARACTER SET latin1 DEFAULT NULL,
+  `hallinto5` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `hallinto6` varchar(90) CHARACTER SET latin1 DEFAULT NULL,
+  `hallinto7` varchar(90) CHARACTER SET latin1 DEFAULT NULL,
+  `talous1h` varchar(85) CHARACTER SET latin1 DEFAULT NULL,
+  `talous1` varchar(86) CHARACTER SET latin1 DEFAULT NULL,
+  `talous1_info` varchar(87) CHARACTER SET latin1 DEFAULT NULL,
+  `talous2` varchar(88) CHARACTER SET latin1 DEFAULT NULL,
+  `talous3` varchar(89) CHARACTER SET latin1 DEFAULT NULL,
+  `talous3_info` varchar(90) CHARACTER SET latin1 DEFAULT NULL,
+  `talous4` varchar(91) CHARACTER SET latin1 DEFAULT NULL,
+  `talous5` varchar(125) CHARACTER SET latin1 DEFAULT NULL,
+  `olosuhde1h` varchar(93) CHARACTER SET latin1 DEFAULT NULL,
+  `olosuhde1` varchar(94) CHARACTER SET latin1 DEFAULT NULL,
+  `olosuhde1_info` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `olosuhde2` varchar(96) CHARACTER SET latin1 DEFAULT NULL,
+  `olosuhde3` varchar(97) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto1h` varchar(98) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto1` varchar(99) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto2` varchar(120) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto3` varchar(101) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto4` varchar(102) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto4_info` varchar(200) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto5` varchar(104) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto6` varchar(125) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto6_linkki` varchar(106) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto6_linkkitxt` varchar(107) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto7` varchar(108) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto7_linkki` varchar(109) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto7_linkkitxt` varchar(110) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto8` varchar(111) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto8_linkki` varchar(112) CHARACTER SET latin1 DEFAULT NULL,
+  `ymparisto8_linkkitxt` varchar(113) CHARACTER SET latin1 DEFAULT NULL,
+  `tapahtuma1h` varchar(114) CHARACTER SET latin1 DEFAULT NULL,
+  `tapahtuma1` varchar(135) CHARACTER SET latin1 DEFAULT NULL,
+  `tapahtuma2` varchar(135) CHARACTER SET latin1 DEFAULT NULL,
+  `tapahtuma2_info` varchar(135) CHARACTER SET latin1 DEFAULT NULL,
+  `tapahtuma3` varchar(135) CHARACTER SET latin1 DEFAULT NULL,
+  `tapahtuma3_info` varchar(135) CHARACTER SET latin1 DEFAULT NULL,
+  `tapahtuma4` varchar(135) CHARACTER SET latin1 DEFAULT NULL,
+  `tapahtuma5` varchar(135) CHARACTER SET latin1 DEFAULT NULL,
+  `varusteet1h` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `varusteet1` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `varusteet2` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `varusteet2_info` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `varusteet3` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `varusteet4` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `varusteet5` varchar(145) CHARACTER SET latin1 DEFAULT NULL,
+  `OrganOtherInputs` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_ylin_1h` varchar(130) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_ylin_1` varchar(131) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_ylin_2` varchar(132) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_ylin_3` varchar(133) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_ylin_4` varchar(134) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_1h` varchar(135) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_1` varchar(136) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_2` varchar(137) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_3` varchar(138) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_4` varchar(139) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_5` varchar(140) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_5_linkki` varchar(141) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_5_linkkitxt` varchar(142) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_6` varchar(143) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_esim_7` varchar(144) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_1h` varchar(145) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_1` varchar(146) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_2` varchar(147) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_2_info` varchar(148) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_3` varchar(149) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_3_info` varchar(150) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_4` varchar(151) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_4_linkki` varchar(152) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_4_linkkitxt` varchar(153) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_5` varchar(154) CHARACTER SET latin1 DEFAULT NULL,
+  `tyo_tekija_6` varchar(155) CHARACTER SET latin1 DEFAULT NULL,
+  `CommOtherInputs` varchar(156) CHARACTER SET latin1 DEFAULT NULL,
+  `ykstalous_1h` varchar(157) CHARACTER SET latin1 DEFAULT NULL,
+  `ykstalous_1` varchar(158) CHARACTER SET latin1 DEFAULT NULL,
+  `ykstalous_2` varchar(159) CHARACTER SET latin1 DEFAULT NULL,
+  `ykstalous_3` varchar(160) CHARACTER SET latin1 DEFAULT NULL,
+  `yksterveys_1h` varchar(161) CHARACTER SET latin1 DEFAULT NULL,
+  `yksterveys_1` varchar(162) CHARACTER SET latin1 DEFAULT NULL,
+  `yksterveys_2` varchar(163) CHARACTER SET latin1 DEFAULT NULL,
+  `yksterveys_3` varchar(164) CHARACTER SET latin1 DEFAULT NULL,
+  `yksterveys_3_info` varchar(165) CHARACTER SET latin1 DEFAULT NULL,
+  `yksvarusteet_1h` varchar(166) CHARACTER SET latin1 DEFAULT NULL,
+  `yksvarusteet_1` varchar(167) CHARACTER SET latin1 DEFAULT NULL,
+  `yksvarusteet_2` varchar(168) CHARACTER SET latin1 DEFAULT NULL,
+  `yksvarusteet_3` varchar(169) CHARACTER SET latin1 DEFAULT NULL,
+  `yksosaaminen_1h` varchar(170) CHARACTER SET latin1 DEFAULT NULL,
+  `yksosaaminen_1` varchar(171) CHARACTER SET latin1 DEFAULT NULL,
+  `yksosaaminen_2` varchar(172) CHARACTER SET latin1 DEFAULT NULL,
+  `yksosaaminen_3` varchar(173) CHARACTER SET latin1 DEFAULT NULL,
+  `yksosaaminen_4` varchar(174) CHARACTER SET latin1 DEFAULT NULL,
+  `yksosaaminen_5` varchar(175) CHARACTER SET latin1 DEFAULT NULL,
+  `IndivOtherInputs` varchar(176) CHARACTER SET latin1 DEFAULT NULL,
+  `kalenteriSuunnitteilla` tinytext COLLATE utf8_swedish_ci,
+  `kalenteriSuunnitteilla_a` tinytext COLLATE utf8_swedish_ci,
+  `kalenteriSuunnitteilla_b` tinytext COLLATE utf8_swedish_ci,
+  `kalenteriSuunnitteilla_c` tinytext COLLATE utf8_swedish_ci,
+  `kalenteriToteuma` tinytext COLLATE utf8_swedish_ci,
+  `kalenteriToteutunut` tinytext COLLATE utf8_swedish_ci,
+  `kalenteriToteutunutToimenpide` tinytext COLLATE utf8_swedish_ci,
+  `kalenteriToteutunutKustannus` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_pvm` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_ots` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_ots2` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio1` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio1q1` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio1v1` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio1v2` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio1v3` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio1v4` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio1v5` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio1v6` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio1v7` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio2q1` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio2q1ohje` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio2q2` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio2q2ohje` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio2q2a` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio2q2b` tinytext COLLATE utf8_swedish_ci,
+  `qry_osio2q2c` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_alku` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_loppu` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_vastaukset` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_vastaajat` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_kulku` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_tyokyky` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_4` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_5` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_5a` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_5b` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_5c` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_6` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_6a` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_6b` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_6c` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_7` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_7a` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_7b` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_7c` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_7d` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_7e` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8a` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8b` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8c` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8d` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8e` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8f` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8g` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8v1` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8v2` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8v3` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_8v4` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_9` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_9a` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_9b` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_9c` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_9d` tinytext COLLATE utf8_swedish_ci,
+  `qry_rpt_9e` tinytext COLLATE utf8_swedish_ci,
+  `qry_r1` tinytext COLLATE utf8_swedish_ci,
+  `qry2_ots` tinytext COLLATE utf8_swedish_ci,
+  `rpt1` tinytext COLLATE utf8_swedish_ci,
+  `rpt2` tinytext COLLATE utf8_swedish_ci,
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_swedish_ci ROW_FORMAT=COMPRESSED;
+
+DELETE FROM `tekstit`;
+/*!40000 ALTER TABLE `tekstit` DISABLE KEYS */;
+INSERT INTO `tekstit` (`Id`, `kieli`, `Page_title`, `Page_title2`, `Page_title3`, `PAGE_lang`, `PAGE_langtxt`, `PAGE_close`, `PAGE_no`, `PAGE_yes`, `PAGE_cancel`, `PAGE_Yhteystiedot`, `PAGE_help`, `PAGE_firstpage`, `PAGE_firstpage2`, `PAGE_design`, `PAGE_calender`, `PAGE_new`, `PAGE_load`, `PAGE_designfile`, `PAGE_Filename`, `PAGE_Ohje`, `PAGE_SesTimeout`, `PAGE_Savename`, `PAGE_Savename2`, `PAGE_loadfile`, `PAGE_loadfiletxt`, `PAGE_ohje2`, `PAGE_print`, `PAGE_ohje3`, `PAGE_ohje4`, `PAGE_clockh`, `PAGE_clockh2`, `PAGE_pvm`, `PAGE_errordbupdate`, `PAGE_errorinsert`, `PAGE_lataapdf`, `PAGE_choose`, `LOGIN_reg`, `LOGIN_reg2`, `LOGIN_usererr`, `LOGIN_errpw`, `LOGIN_login`, `LOGIN_user`, `LOGIN_pw`, `otsikko_muuta`, `otsikko_muutaa`, `otsikko_muutac`, `otsikko_muutab`, `otsikko_muutad`, `otsikko_muutamax`, `otsikko_muutamaxb`, `kysymys_muutaInsBtn`, `Menu_TITLE1`, `Menu_TITLE1a`, `Menu_TITLE1b`, `Menu_TITLE2`, `Menu_TITLE2a`, `Menu_TITLE2b`, `Menu_TITLE2c`, `Menu_TITLE2ca`, `Menu_TITLE2cb`, `Menu_TITLE2d`, `Menu_TITLE3`, `Menu_TITLE3a`, `UpdateError`, `UpdateOk`, `TasoO`, `TasoT`, `TasoY`, `TasoOa`, `TasoTa`, `TasoYa`, `page2_1`, `page2_2`, `page2_3`, `page2_4`, `page2_5`, `hallinto1h`, `hallinto1`, `hallinto2`, `hallinto3`, `hallinto4`, `hallinto5`, `hallinto6`, `hallinto7`, `talous1h`, `talous1`, `talous1_info`, `talous2`, `talous3`, `talous3_info`, `talous4`, `talous5`, `olosuhde1h`, `olosuhde1`, `olosuhde1_info`, `olosuhde2`, `olosuhde3`, `ymparisto1h`, `ymparisto1`, `ymparisto2`, `ymparisto3`, `ymparisto4`, `ymparisto4_info`, `ymparisto5`, `ymparisto6`, `ymparisto6_linkki`, `ymparisto6_linkkitxt`, `ymparisto7`, `ymparisto7_linkki`, `ymparisto7_linkkitxt`, `ymparisto8`, `ymparisto8_linkki`, `ymparisto8_linkkitxt`, `tapahtuma1h`, `tapahtuma1`, `tapahtuma2`, `tapahtuma2_info`, `tapahtuma3`, `tapahtuma3_info`, `tapahtuma4`, `tapahtuma5`, `varusteet1h`, `varusteet1`, `varusteet2`, `varusteet2_info`, `varusteet3`, `varusteet4`, `varusteet5`, `OrganOtherInputs`, `tyo_ylin_1h`, `tyo_ylin_1`, `tyo_ylin_2`, `tyo_ylin_3`, `tyo_ylin_4`, `tyo_esim_1h`, `tyo_esim_1`, `tyo_esim_2`, `tyo_esim_3`, `tyo_esim_4`, `tyo_esim_5`, `tyo_esim_5_linkki`, `tyo_esim_5_linkkitxt`, `tyo_esim_6`, `tyo_esim_7`, `tyo_tekija_1h`, `tyo_tekija_1`, `tyo_tekija_2`, `tyo_tekija_2_info`, `tyo_tekija_3`, `tyo_tekija_3_info`, `tyo_tekija_4`, `tyo_tekija_4_linkki`, `tyo_tekija_4_linkkitxt`, `tyo_tekija_5`, `tyo_tekija_6`, `CommOtherInputs`, `ykstalous_1h`, `ykstalous_1`, `ykstalous_2`, `ykstalous_3`, `yksterveys_1h`, `yksterveys_1`, `yksterveys_2`, `yksterveys_3`, `yksterveys_3_info`, `yksvarusteet_1h`, `yksvarusteet_1`, `yksvarusteet_2`, `yksvarusteet_3`, `yksosaaminen_1h`, `yksosaaminen_1`, `yksosaaminen_2`, `yksosaaminen_3`, `yksosaaminen_4`, `yksosaaminen_5`, `IndivOtherInputs`, `kalenteriSuunnitteilla`, `kalenteriSuunnitteilla_a`, `kalenteriSuunnitteilla_b`, `kalenteriSuunnitteilla_c`, `kalenteriToteuma`, `kalenteriToteutunut`, `kalenteriToteutunutToimenpide`, `kalenteriToteutunutKustannus`, `qry_rpt_pvm`, `qry_rpt_ots`, `qry_rpt_ots2`, `qry_osio1`, `qry_osio1q1`, `qry_osio1v1`, `qry_osio1v2`, `qry_osio1v3`, `qry_osio1v4`, `qry_osio1v5`, `qry_osio1v6`, `qry_osio1v7`, `qry_osio2q1`, `qry_osio2q1ohje`, `qry_osio2q2`, `qry_osio2q2ohje`, `qry_osio2q2a`, `qry_osio2q2b`, `qry_osio2q2c`, `qry_rpt_alku`, `qry_rpt_loppu`, `qry_rpt_vastaukset`, `qry_rpt_vastaajat`, `qry_rpt_kulku`, `qry_rpt_tyokyky`, `qry_rpt_4`, `qry_rpt_5`, `qry_rpt_5a`, `qry_rpt_5b`, `qry_rpt_5c`, `qry_rpt_6`, `qry_rpt_6a`, `qry_rpt_6b`, `qry_rpt_6c`, `qry_rpt_7`, `qry_rpt_7a`, `qry_rpt_7b`, `qry_rpt_7c`, `qry_rpt_7d`, `qry_rpt_7e`, `qry_rpt_8`, `qry_rpt_8a`, `qry_rpt_8b`, `qry_rpt_8c`, `qry_rpt_8d`, `qry_rpt_8e`, `qry_rpt_8f`, `qry_rpt_8g`, `qry_rpt_8v1`, `qry_rpt_8v2`, `qry_rpt_8v3`, `qry_rpt_8v4`, `qry_rpt_9`, `qry_rpt_9a`, `qry_rpt_9b`, `qry_rpt_9c`, `qry_rpt_9d`, `qry_rpt_9e`, `qry_r1`, `qry2_ots`, `rpt1`, `rpt2`) VALUES
+	(1, 'fi', 'K&auml;vely ja py&ouml;r&auml;ily', 'Viisaan liikkumisen ty&ouml;paikka', 'Ty&ouml;kalu suunnitteluun, toteutukseen ja arvioi', 'en', 'In English', 'Sulje', 'ei', 'kyll&auml;', 'Peruuta', 'Yhteystiedot', 'Ty&ouml;kalun k&auml;ytt&ouml;ohje', 'Alkuun', '<b>Palaa etusivulle</b>', '<b>Palaa toimenpidevalikkoon</b>', '<b>Palaa toimenpiteiden m&auml;&auml;rityksiin</b>', 'Tee uusi', 'Avaa edellinen', 'Hae aiempi suunnitelma', 'Valitse tiedosto!', 'Ohje', 'Istunto sulkeutunut. Aloita alusta!', 'Tallenna tiedostoon', 'Tallenna nimell&auml;:', 'Klikkaa avataksesi', 'Avaa..', 'Palloa klikkaamalla p&auml;&auml;set<br> muokkaamaan tietoja.', 'Tulosta', 'Valitse toimenpiteet kultakin tasolta (organisaatio, ty&ouml;yhteis&ouml;, yksil&ouml;)', 'M&auml;&auml;rit&auml; toimenpiteiden ajankohta, tarvittavat j&auml;rjestelyt, toteuttajat', 'Tarkista suunnitelma vuosikellosta. N&auml;et toimenpiteet tasoittain', ' ja kuukausittain.', 'P&auml;iv&auml;m&auml;&auml;r&auml;', 'Tietokannan p&auml;ivitys ei onnistunut!', 'Tietokantaan lis&auml;&auml;minen ei onnistunut!', 'lataa pdf-tiedosto', 'Valitse', 'Rekister&ouml;inti onnistui!', 'Rekister&ouml;inti', 'K&auml;ytt&auml;j&auml;nimi jo k&auml;yt&ouml;ss&auml;', 'salasana ei ole oikein', 'Kirjautuminen', 'K&auml;ytt&auml;j&auml;tunnus(s-posti)', 'Salasana', 'Muuta', 'Muuta (t&auml;t&auml; vaihtoehtoa klikkaamalla p&auml;&auml;set kirjoittamaan toimenpiteit&auml;, joita ei ole valm', 'T&auml;t&auml; vaihtoehtoa klikkaamalla p&auml;&auml;set lis&auml;&auml;m&auml;&auml;n toimenpiteit&auml;, joita ei ole valmiissa valikossa', '(lis&auml;&auml; kampanja tai muu toimenpide)', 'Kirjoita kampanja tai muu toimenpide', 'Maksimim&auml;&auml;r&auml; lis&auml;yksi&auml;', 'saavutettu', 'Lis&auml;&auml; uusi kohta', 'Suunnitelma ja toteutus', 'Tee uusi', 'Avaa edellinen', 'Arviointi', 'Toteutuminen', 'Toteutuneet kustannukset (&euro;)', 'Vaikutukset', 'Kysely', 'Vastaukset', 'Kustannusarvio&nbsp;(&euro;)', 'Raportti', 'Seuranta', 'Tietokannan p&auml;ivitys ei onnistunut', 'onnistui', 'ORGANISAATIOTASO', 'TY&Ouml;YHTEIS&Ouml;TASO', 'YKSIL&Ouml;TASO', 'Koko organisaatiota koskevat strategiset linjaukset', 'Johdon, esimiesten ja ty&ouml;ntekij&ouml;iden yhteiset toimenpiteet', 'Ty&ouml;ntekij&ouml;ihin henkil&ouml;kohtaisesti kohdistuvat toimenpiteet', 'On jo k&auml;yt&ouml;ss&auml;', 'Ajankohta', 'Tarvittavat j&auml;rjestelyt', 'Toteuttajat', 'Kustannusarvio (&euro;)', 'Hallinnolliset', 'Kirjataan viisaan liikkumisen edist&auml;minen toimintaa ohjaavaan asiakirjaan', 'Nimet&auml;&auml;n viisaan liikkumisen edist&auml;miselle vastuuhenkil&ouml;', 'Tiedotetaan ty&ouml;ntekij&ouml;it&auml; viisaan liikkumisen mahdollisuuksista', 'Otetaan ty&ouml;matkojen kulkutapa puheeksi terveystarkastuksissa ja tehd&auml;&auml;n yhteisty&ouml;t&auml; ty&ouml;terveyshuollon kanssa', 'Seurataan ty&ouml;matkojen kulkutapoja s&auml;&auml;nn&ouml;llisin v&auml;liajoin syksyll&auml; ja/tai kev&auml;&auml;ll&auml;', 'Parannetaan ty&ouml;paikan videoneuvottelumahdollisuuksia', 'Annetaan mahdollisuus tai parannetaan mahdollisuuksia tehd&auml; et&auml;t&ouml;it&auml;', 'Taloudelliset', 'Tarjotaan mahdollisuutta ty&ouml;suhdematkalippuun', 'Verov&auml;hennett&auml;v&auml; etu ty&ouml;nantajalle 300e/vuosi/ty&ouml;ntekij&auml;', 'Hankitaan lainattavia matkakortteja ty&ouml;asiointiin', 'Laaditaan pelis&auml;&auml;nn&ouml;t viisaan liikkumisen korvaamisesta', 'aika, raha (esim. www.tienaatyomatkalla.com), palvelut jne', 'Sovitaan, ett&auml; joukkoliikenteen k&auml;ytt&ouml; sis&auml;ltyy ty&ouml;aikaan', 'Sovitaan, ett&auml; ty&ouml;matkaliikkujien vaatteiden vaihtaminen ja suihkussa k&auml;yminen sis&auml;ltyy ty&ouml;aikaan', 'Olosuhteet', 'Kohennetaan / lis&auml;t&auml;&auml;n suihkutiloja', 'lis&auml;t&auml;&auml;n pyyhekoukkuja, meikkauspeilej&auml;, hiustenkuivain ja ”kosmetiikkakori” yhteisk&auml;ytt&ouml;&ouml;n', 'Parannetaan vaatteiden kuivausmahdollisuuksia', 'Parannetaan pukukaappien saatavuutta / kuntoa', 'Ymp&auml;rist&ouml;', 'Hankitaan py&ouml;r&auml;telineit&auml; ja/tai parannetaan niiden saavutettavuutta / kuntoa', 'Hankitaan tai parannetaan py&ouml;r&auml;n s&auml;ilytystiloja esim. py&ouml;r&auml;katokset, tila parkkihalliin', 'Varataan erillinen tila py&ouml;r&auml;n kunnostukseen ja pesuun esim. parkkihallista', 'Rajoitetaan henkil&ouml;auton pys&auml;k&ouml;intimahdollisuuksia.', 'Esimerkiksi parkkipaikkojen v&auml;hent&auml;minen, ei-nimetyt paikat, maksullisuus, jakaminen tarpeen mukaan esim. pitk&auml;matkalaisille ja kimppakyytej&auml; k&auml;ytt&auml;ville ensin.', 'Tarjotaan mahdollisuutta pys&auml;k&ouml;id&auml; auto kauemmas ty&ouml;paikasta', 'Kiinnitet&auml;&auml;n yleisten tilojen seinille k&auml;velyn ja py&ouml;r&auml;ilyn edist&auml;misjulisteita', 'http://www.ukkinstituutti.fi/verkkokauppa', 'www.ukkinstituutti.fi/verkkokauppa', 'Kannustetaan viisaaseen liikkumiseen yleisten tilojen n&auml;ytt&ouml;ruuduilla', 'http://www.youtube.com/watch?v=1W8P8qWnCnQ', 'video', 'Hankitaan kokoustiloihin infokolmioita k&auml;velyn ja py&ouml;r&auml;ilyn hy&ouml;dyist&auml; ', 'http://www.ukkinstituutti.fi/verkkokauppa', 'www.ukkinstituutti.fi/verkkokauppa', 'Tapahtumat', 'J&auml;rjestet&auml;&auml;n henkil&ouml;kunnalle koulutusta viisaasta liikkumisesta erikseen tai osana ty&ouml;hyvinvointitoimintaa', 'J&auml;rjestet&auml;&auml;n henkil&ouml;kunnalle koulutusta taloudellisesta ajotavasta ja kest&auml;vist&auml; liikkumistavoista', 'Esimerkiksi Ekokumppanit Oy', 'J&auml;rjestet&auml;&auml;n henkil&ouml;kunnalle koulutusta liikenneturvallisuudesta mukaan lukien k&auml;vely ja py&ouml;r&auml;ily', 'Esimerkiksi Liikenneturva', 'J&auml;rjestet&auml;&auml;n henkil&ouml;kunnalle ty&ouml;paikan omia viisaan liikkumisen p&auml;ivi&auml; tai kampanjoita', 'Osallistutaan alueellisiin tai valtakunnallisiin k&auml;velyn ja/tai py&ouml;r&auml;ilyn kampanjoihin', 'Varusteet', 'Hankitaan ty&ouml;paikalle asiointipy&ouml;r&auml;', 'Hankitaan tai vuokrataan ty&ouml;paikalle yhteisk&auml;ytt&ouml;auto ty&ouml;asiamatkoja varten', 'Palvelua tarjoavia yrityksi&auml; esimerkiksi Sixt, EkoRent', 'Hankitaan yhteiseen k&auml;ytt&ouml;&ouml;n py&ouml;r&auml;pumppu tai -pumppuja', 'Hankitaan py&ouml;r&auml;n korjausv&auml;lineit&auml; ja tarjotaan niit&auml; k&auml;ytt&ouml;&ouml;n maksutta', 'Tehd&auml;&auml;n k&auml;vely- ja py&ouml;r&auml;ilyvarusteiden yhteishankintoja esim. niin, ett&auml; ty&ouml;nantaja korvaa tietyn summan', 'Muuta', 'Ylin johto', 'On mukana viisaan liikkumisen tapahtumissa ja tempauksissa', 'Kannustaa esimiehi&auml; ottamaan viisaan liikkumisen puheeksi ty&ouml;ntekij&ouml;iden kanssa', 'Ottaa esille viisaan liikkumisen tunnusluvut esitelless&auml;&auml;n toimintakertomusta esimiehille ja ty&ouml;ntekij&ouml;ille', 'N&auml;ytt&auml;&auml; viisaan liikkumisen esimerkki&auml;', 'Esimiehet', 'Muistuttavat ty&ouml;ntekij&ouml;it&auml; s&auml;&auml;nn&ouml;llisesti viisaasta liikkumisesta palavereissa tai kokouksissa', 'Jakavat ty&ouml;ntekij&ouml;iden kanssa viisaan liikkumisen kokemuksia ja -ideoita palavereissa tai kokouksissa', 'Ottavat viisaan liikkumisen osaksi kehityskeskustelua', 'J&auml;rjest&auml;v&auml;t ty&ouml;ntekij&ouml;iden kanssa viisaan liikkumisen tempauksia', 'Pit&auml;v&auml;t viisaan liikkumisen ty&ouml;pajan (www.sport.fi)', 'http://www.sport.fi', 'www.sport.fi', 'Toteuttavat ty&ouml;ntekij&ouml;iden kanssa ty&ouml;paikan oman viisaan liikkumisen kisan', 'N&auml;ytt&auml;v&auml;t viisaan liikkumisen esimerkki&auml;', 'Ty&ouml;ntekij&auml;t', 'Perehdytt&auml;v&auml;t uudet ty&ouml;ntekij&auml;t viisaaseen liikkumiseen', 'Muodostavat ty&ouml;matkojen kulkemiseen kaveriporukoita: k&auml;vely tai py&ouml;r&auml;ily yhdess&auml; t&ouml;ihin / t&ouml;ist&auml;', 'k&auml;vely tai py&ouml;r&auml;ily yhdess&auml; t&ouml;ihin / t&ouml;ist&auml;', 'Luovat kimppakyytij&auml;rjestelm&auml;n', 'j&auml;rjestelm&auml;alustoja ja lis&auml;tietoa', 'Osallistuvat kilometrikisaan (www.kilometrikisa.fi)', 'http://www.kilometrikisa.fi', 'www.kilometrikisa.fi', 'J&auml;rjest&auml;v&auml;t py&ouml;r&auml;n kunnostustalkoot', 'Jakavat viisaan liikkumisen vinkkej&auml; ty&ouml;paikan sis&auml;isess&auml; lehdess&auml; tai verkkosivuilla', 'Muuta', 'Taloudelliset edut', 'Raha, aika, palvelut jne.', 'Ilmainen aamupala / lounas', 'Py&ouml;r&auml;huollon tarjoaminen ilmaiseksi tai pienell&auml; omavastuulla', 'Terveys', 'Ylim&auml;&auml;r&auml;iset terveysmittaukset', 'Ylim&auml;&auml;r&auml;iset kuntotestit', 'V&auml;lineet liikkumisen omaseurantaan', 'kortit (esim. www.kkiohjelma.fi), askelmittarit, k&auml;nnykk&auml;sovellukset, kaupalliset mittarit, nettipalvelut (esim. www.heiaheia.com) jne.', 'Varusteet', 'Yleiset: heijastimet, heijastinliivit', 'K&auml;vely: jalkineet, reppu, k&auml;velyasu, liukuesteet, jne.', 'Py&ouml;r&auml;ily: kyp&auml;r&auml;, sadepuku, lamppu, nastarenkaat jne.', 'Osaaminen', 'Py&ouml;r&auml;huollon opastus', 'K&auml;velytekniikan ja/tai -jalkineiden opastus', 'Henkil&ouml;kohtainen liikuntaneuvonta esim. ty&ouml;terveyshuollossa', 'Henkil&ouml;kohtainen liikkumissuunnitelma', 'Henkil&ouml;kohtaiset muistutukset', 'Muuta', 'Suunnitteilla', 'Kokonaan&nbsp;&nbsp;', 'Osittain, miksi&nbsp;&nbsp;', 'Ei lainkaan, miksi&nbsp;&nbsp;', 'Toteutuminen', 'Toteutuneet', '- toimenpiteet&nbsp;', 'Kustannukset&nbsp;(&euro;)&nbsp;', 'P&auml;iv&auml;m&auml;&auml;r&auml;', 'Henkil&ouml;st&ouml;kyselyn alku- ja lopputilanne', 'Kysymyksi&auml; henkil&ouml;st&ouml;lle l&auml;ht&ouml;- ja lopputilanteen arviointia varten', 'Ty&ouml;matkat', '1. Miten kuljet t&auml;ll&auml; hetkell&auml; suurimman osan ty&ouml;matkoistasi (matkat kotoa t&ouml;ihin ja t&ouml;ist&auml; kotiin)?', 'henkil&ouml;autolla yksin', 'kimppakyydill&auml;', 'bussilla', 'mopoautolla, moottoripy&ouml;r&auml;ll&auml; tms.', 'junalla', 'k&auml;vellen', 'py&ouml;r&auml;ll&auml;', '2. Oletetaan, ett&auml; ty&ouml;kykysi on parhaimmillaan saanut 10 pistett&auml;. Kirjoita viivalle pistem&auml;&auml;r&auml;, jonka antaisit nykyiselle ty&ouml;kyvyllesi asteikolla 1-10?&nbsp;', NULL, NULL, NULL, NULL, NULL, NULL, 'Alkukysely', 'Loppukysely', 'Vastaukset', 'Vastaajien lukum&auml;&auml;r&auml;', 'Ty&ouml;matkojen kulkutavat', 'Ty&ouml;kyky ja terveys', '2. Mink&auml; pistem&auml;&auml;r&auml;n antaisit nykyiselle ty&ouml;kyvyllesi (1-10)?', 'Vastaajien keskiarvo', 'alussa', 'ja lopussa', 'lopussa', '3. Uskotko, ett&auml; terveydentilasi puolesta pystyt ty&ouml;skentelem&auml;&auml;n nykyisess&auml; ammatissasi kahden vuoden kuluttua', 'tuskin', 'en ole varma', 'melko varmasti', '4. Miten hyvin yleens&auml; palaudut ty&ouml;si aiheuttamasta kuormituksesta ty&ouml;p&auml;iv&auml;n j&auml;lkeen?', 'hyvin', 'melko hyvin', 'kohtalaisesti', 'melko huonosti', 'huonosti', '5. Onko sinulla viimeksi kuluneen kuukauden aikana ollut seuraavia oireita ja kuinka usein?', 'Niska- ja hartiakipuja', 'Sel&auml;n alaosan kipuja', 'Nukahtamisvaikeuksia', 'Unettomuutta', 'Ty&ouml;aikaista v&auml;symyst&auml;', 'P&auml;&auml;ns&auml;rky&auml;', 'Muita oireita', 'Harvoin tai ei lainkaan', 'Noin kerran kuussa', 'Noin kerran viikossa', 'L&auml;hes joka p&auml;iv&auml;', 'Mik&auml; on oma arviosi terveydentilastasi?', 'huono', 'melko huono', 'keskitasoinen', 'melko hyv&auml;', 'hyv&auml;', NULL, 'Valitse kyselyajankohdat', 'Arvio', 'Kustannus');
+/*!40000 ALTER TABLE `tekstit` ENABLE KEYS */;
+
+DROP TABLE IF EXISTS `vili_users`;
+CREATE TABLE IF NOT EXISTS `vili_users` (
+  `userID` int(11) NOT NULL AUTO_INCREMENT,
+  `userFName` varchar(65) NOT NULL,
+  `userSName` varchar(75) NOT NULL,
+  `userCompany` varchar(50) DEFAULT NULL,
+  `userCompanySize` varchar(15) DEFAULT NULL,
+  `userEmail` varchar(75) NOT NULL,
+  `userPass` varchar(155) NOT NULL,
+  `userStatus` enum('Y','N') NOT NULL DEFAULT 'N',
+  `userTable` tinytext NOT NULL,
+  `userSalt` varchar(100) DEFAULT NULL,
+  `tokenCode` varchar(100) DEFAULT NULL,
+  `CreationDay` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`userID`),
+  UNIQUE KEY `userEmail` (`userEmail`)
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+
+
